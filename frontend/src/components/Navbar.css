@@ -1,0 +1,143 @@
+/* Navbar.css - Modern Dark Theme */
+
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@400;500&display=swap');
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #1f1f1f, #2c2c2c); /* Dark gradient */
+  padding: 0.8rem 2rem;
+  color: #ffffff;
+  font-family: 'Montserrat', 'Roboto', sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: background 0.3s ease;
+}
+
+/* Logo/title */
+nav .title {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #ff7f50; /* Coral accent */
+  text-decoration: none;
+  letter-spacing: 1.5px;
+  transition: color 0.3s ease;
+}
+
+nav .title:hover {
+  color: #ffa07a; /* Lighter coral on hover */
+}
+
+/* Hamburger menu for mobile */
+nav .menu {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+nav .menu span {
+  width: 28px;
+  height: 3px;
+  background-color: #ffffff;
+  border-radius: 3px;
+  transition: all 0.4s ease;
+}
+
+/* Menu links */
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  align-items: center;
+}
+
+nav ul li {
+  display: flex;
+  align-items: center;
+}
+
+nav ul li a,
+nav ul li .auth-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Underline hover effect */
+nav ul li a::after,
+nav ul li .auth-link::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #ff7f50;
+  transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after,
+nav ul li .auth-link:hover::after {
+  width: 100%;
+}
+
+/* Auth buttons */
+nav ul li button.auth-link {
+  background-color: #ff7f50;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #fff;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+nav ul li button.auth-link:hover {
+  background-color: #ffa07a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+nav ul li button.auth-link:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive: Mobile menu */
+@media (max-width: 768px) {
+  nav .menu {
+    display: flex;
+  }
+
+  nav ul {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: linear-gradient(135deg, #1f1f1f, #2c2c2c);
+    flex-direction: column;
+    width: 220px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, box-shadow 0.3s ease;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  nav ul.open {
+    max-height: 500px;
+  }
+
+  nav ul li {
+    padding: 1rem 1.2rem;
+  }
+}

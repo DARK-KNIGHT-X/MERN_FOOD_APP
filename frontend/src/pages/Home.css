@@ -1,0 +1,58 @@
+/* Home.css - Dark Theme Layout */
+
+/* Page container */
+.home-container {
+  background-color: #121212; /* Dark background */
+  color: #ffffff;
+  font-family: 'Montserrat', 'Roboto', sans-serif;
+  padding: 2rem 1.5rem;
+  min-height: 100vh;
+}
+
+/* Carousel spacing */
+.home-container > .carousel-container {
+  margin-bottom: 2.5rem;
+}
+
+/* Page title */
+.home-title {
+  display: flex;
+  justify-content: center; /* horizontal center */
+  align-items: center;  
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ff7f50; /* Accent color */
+  margin-bottom: 2rem;
+  text-align: center;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Product grid layout */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  align-items: stretch;
+}
+
+/* Hover effect on entire product grid item wrapper */
+.product-grid > * {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-grid > *:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(255, 127, 80, 0.3); /* subtle glowing shadow */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .home-title {
+    font-size: 2rem;
+  }
+
+  .product-grid {
+    gap: 1.5rem;
+  }
+}
