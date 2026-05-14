@@ -1,9 +1,15 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-const { getProductById } = require('../controllers/productController');
+const {
+  getProducts,
+  getProductById,
+} = require("../controllers/productController");
 
-// Public routes
-router.get('/:id', getProductById);
+// ✅ THIS FIXES YOUR ERROR
+router.get("/", getProducts);
+
+// single product
+router.get("/:id", getProductById);
 
 module.exports = router;
