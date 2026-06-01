@@ -12,7 +12,7 @@ export default function ProductDetail() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/products/${id}`)
+      .get(`https://mern-food-app-fez1.onrender.com/api/products/${id}`)
       .then((res) => setProduct(res.data))
       .catch((err) => {
         console.error(err);
@@ -38,7 +38,7 @@ export default function ProductDetail() {
           addToCart({
             id: product._id,
             name: product.name,
-            img: product.img,   // ✅ FIXED
+            img: product.img,
             price: product.price,
             qty: 1,
             size: "regular",

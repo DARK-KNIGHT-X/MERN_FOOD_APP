@@ -14,7 +14,7 @@ function Home() {
     try {
       setLoading(true);
       const res = await axios.get(
-        `http://localhost:5000/api/products?search=${searchText}`
+        `https://mern-food-app-fez1.onrender.com/api/products?search=${searchText}`
       );
       setProducts(res.data);
       setError(null);

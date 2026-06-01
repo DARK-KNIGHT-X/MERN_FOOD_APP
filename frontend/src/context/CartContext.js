@@ -9,7 +9,7 @@ const CartProvider = ({ children }) => {
   useEffect(() => {
     const fetchCart = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/cart", {
+        const res = await fetch("https://mern-food-app-fez1.onrender.com", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -21,7 +21,7 @@ const CartProvider = ({ children }) => {
           const formattedCart = data.items.map((item) => ({
             id: item.productId._id,
             name: item.productId.name,
-            img: item.productId.img,   // ✅ FIXED
+            img: item.productId.img,
             price: item.productId.price,
             qty: item.quantity,
             size: "regular",
@@ -40,7 +40,7 @@ const CartProvider = ({ children }) => {
   // Add to cart
   const addToCart = async (product) => {
     try {
-      await fetch("http://localhost:5000/api/cart/add", {
+      await fetch("https://mern-food-app-fez1.onrender.com/api/cart/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -75,7 +75,7 @@ const CartProvider = ({ children }) => {
   // Remove
   const removeFromCart = async (id) => {
     try {
-      await fetch(`http://localhost:5000/api/cart/remove/${id}`, {
+      await fetch(`https://mern-food-app-fez1.onrender.com/api/cart/remove/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

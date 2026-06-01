@@ -14,7 +14,7 @@ export default function Signup() {
     e.preventDefault();
     try {
       // Register user
-      await fetch("http://localhost:5000/api/auth/register", {
+      await fetch("https://mern-food-app-fez1.onrender.com/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
