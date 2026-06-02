@@ -1,6 +1,25 @@
 import { useState } from "react";
 import "./Carousel.css";
 
+// ✅ Fixed: Unsplash random URLs hata ke reliable food images lagaye
+const slides = [
+  {
+    image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1600",
+    title: "Delicious Burgers",
+    subtitle: "Fresh • Hot • Tasty",
+  },
+  {
+    image: "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=1600",
+    title: "Yummy Momos",
+    subtitle: "Steamed to perfection",
+  },
+  {
+    image: "https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=1600",
+    title: "Fresh Fruits",
+    subtitle: "Healthy & Organic",
+  },
+];
+
 const Carousel = ({ onSearch }) => {
   const [searchText, setSearchText] = useState("");
 
@@ -11,81 +30,29 @@ const Carousel = ({ onSearch }) => {
   return (
     <div id="heroCarousel" className="carousel slide carousel-fade">
       <div className="carousel-inner hero-carousel-inner">
-        {/* Slide 1 */}
-        <div
-          className="carousel-item active hero-slide"
-          style={{
-            backgroundImage:
-              "url('https://source.unsplash.com/random/1600x800?burger')",
-          }}
-        >
-          <div className="glassy-overlay">
-            <h1>Delicious Burgers</h1>
-            <p>Fresh • Hot • Tasty</p>
+        {slides.map((slide, index) => (
+          <div
+            key={index}
+            className={`carousel-item hero-slide ${index === 0 ? "active" : ""}`}
+            style={{ backgroundImage: `url('${slide.image}')` }}
+          >
+            <div className="glassy-overlay">
+              <h1>{slide.title}</h1>
+              <p>{slide.subtitle}</p>
 
-            {/* Search Component */}
-            <div className="carousel-search">
-              <input
-                type="text"
-                placeholder="Search your favorite food..."
-                value={searchText}
-                onChange={(e) => setSearchText(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-              />
-              <button onClick={handleSearch}>Search</button>
+              <div className="carousel-search">
+                <input
+                  type="text"
+                  placeholder="Search your favorite food..."
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                />
+                <button onClick={handleSearch}>Search</button>
+              </div>
             </div>
           </div>
-        </div>
-
-        {/* Slide 2 */}
-        <div
-          className="carousel-item hero-slide"
-          style={{
-            backgroundImage:
-              "url('https://source.unsplash.com/random/1600x800?momos')",
-          }}
-        >
-          <div className="glassy-overlay">
-            <h1>Yummy Momos</h1>
-            <p>Steamed to perfection</p>
-
-            <div className="carousel-search">
-              <input
-                type="text"
-                placeholder="Search your favorite food..."
-                value={searchText}
-                onChange={(e) => setSearchText(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-              />
-              <button onClick={handleSearch}>Search</button>
-            </div>
-          </div>
-        </div>
-
-        {/* Slide 3 */}
-        <div
-          className="carousel-item hero-slide"
-          style={{
-            backgroundImage:
-              "url('https://source.unsplash.com/random/1600x800?fruits')",
-          }}
-        >
-          <div className="glassy-overlay">
-            <h1>Fresh Fruits</h1>
-            <p>Healthy & Organic</p>
-
-            <div className="carousel-search">
-              <input
-                type="text"
-                placeholder="Search your favorite food..."
-                value={searchText}
-                onChange={(e) => setSearchText(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-              />
-              <button onClick={handleSearch}>Search</button>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
 
       {/* Controls */}

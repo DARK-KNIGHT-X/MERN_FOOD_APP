@@ -2,10 +2,14 @@ import React, { useState, useContext } from "react";
 import "./Navbar.css";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import { CartContext } from "../context/CartContext";
 
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { user, logout } = useContext(AuthContext);
+  const { cart } = useContext(CartContext);
+
+  const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
 
   return (
     <nav>
@@ -28,6 +32,13 @@ export const Navbar = () => {
         </li>
         <li>
           <NavLink to="/contact">Contact</NavLink>
+        </li>
+
+        {/* ✅ Cart link with item count badge */}
+        <li>
+          <NavLink to="/cart" className="auth-link">
+            🛒 Cart {totalItems > 0 && <span className="cart-badge">{totalItems}</span>}
+          </NavLink>
         </li>
 
         {user ? (

@@ -3,14 +3,14 @@ import axios from "axios";
 
 export const AuthContext = createContext();
 
-// 🔥 AUTO TOKEN ATTACH (IMPORTANT FIX)
+const BASE_URL = "https://mern-food-app-fez1.onrender.com";
+
+// Auto token attach
 axios.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
-
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
-
   return config;
 });
 
@@ -21,15 +21,18 @@ export const AuthProvider = ({ children }) => {
   });
 
   const login = async (email, password) => {
-    const res = await axios.post("https://mern-food-app-fez1.onrender.com", {
-      email,
-      password,
-    });
+    try {
+      const res = await axios.post(`${BASE_URL}/api/auth/login`, {
+        email,
+        password,
+      });
 
-    setUser(res.data);
-
-    localStorage.setItem("user", JSON.stringify(res.data));
-    localStorage.setItem("token", res.data.token);
+      setUser(res.data);
+      localStorage.setItem("user", JSON.stringify(res.data));
+      localStorage.setItem("token", res.data.token);
+    } catch (err) {
+      throw new Error(err.response?.data?.message || "Login failed");
+    }
   };
 
   const logout = () => {

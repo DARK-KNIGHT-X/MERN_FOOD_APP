@@ -45,7 +45,7 @@ const Cart = () => {
 
       // 🚀 STEP 2: Razorpay Options
       const options = {
-        key: "YOUR_RAZORPAY_KEY_ID", // replace this
+        key: "rzp_test_SweLY8ke1JF307", // replace this
         amount: data.amount,
         currency: "INR",
         name: "Food App",

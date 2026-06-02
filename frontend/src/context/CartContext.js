@@ -2,16 +2,21 @@ import { createContext, useState, useEffect } from "react";
 
 export const CartContext = createContext();
 
+const BASE_URL = "https://mern-food-app-fez1.onrender.com";
+
 const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
-  // Fetch cart
+  // Fetch cart — only if logged in
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
     const fetchCart = async () => {
       try {
-        const res = await fetch("https://mern-food-app-fez1.onrender.com", {
+        const res = await fetch(`${BASE_URL}/api/cart`, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${token}`,
           },
         });
 
@@ -40,7 +45,7 @@ const CartProvider = ({ children }) => {
   // Add to cart
   const addToCart = async (product) => {
     try {
-      await fetch("https://mern-food-app-fez1.onrender.com/api/cart/add", {
+      await fetch(`${BASE_URL}/api/cart/add`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -72,10 +77,10 @@ const CartProvider = ({ children }) => {
     });
   };
 
-  // Remove
+  // Remove from cart
   const removeFromCart = async (id) => {
     try {
-      await fetch(`https://mern-food-app-fez1.onrender.com/api/cart/remove/${id}`, {
+      await fetch(`${BASE_URL}/api/cart/remove/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -88,21 +93,16 @@ const CartProvider = ({ children }) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== id));
   };
 
-  // Update qty
+  // Update qty — fixed to 2 params
   const updateQty = (id, qty) => {
     if (qty < 1) return;
-
     setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.id === id ? { ...item, qty } : item
-      )
+      prevCart.map((item) => (item.id === id ? { ...item, qty } : item))
     );
   };
 
   return (
-    <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, updateQty }}
-    >
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQty }}>
       {children}
     </CartContext.Provider>
   );

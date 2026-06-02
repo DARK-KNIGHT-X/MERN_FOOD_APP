@@ -11,6 +11,11 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
+// ✅ Placeholder pages (baad mein proper pages bana lena)
+const About = () => <div style={{ padding: "2rem" }}><h2>About Us</h2><p>We love food! 🍔</p></div>;
+const Services = () => <div style={{ padding: "2rem" }}><h2>Our Services</h2><p>Fast delivery at your doorstep 🚀</p></div>;
+const Contact = () => <div style={{ padding: "2rem" }}><h2>Contact Us</h2><p>Email: foodie@example.com 📧</p></div>;
+
 function App() {
   return (
     <BrowserRouter>
@@ -20,13 +25,16 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/cart" element={
           <ProtectedRoute>
             <Cart />
           </ProtectedRoute>
         } />
       </Routes>
-      <Footer/>
+      <Footer />
     </BrowserRouter>
   );
 }

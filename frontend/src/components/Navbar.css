@@ -141,3 +141,14 @@ nav ul li button.auth-link:active {
     padding: 1rem 1.2rem;
   }
 }
+
+
+
+.cart-badge {
+  background-color: #ff4444;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 7px;
+  font-size: 12px;
+  margin-left: 4px;
+}
